@@ -1,0 +1,21 @@
+GetRankIntent what is my rank
+GetRankIntent what is my sr
+GetMainIntent who is my main
+GetMainIntent who do I main
+GetMainIntent who do I play as most
+GetCharacterStatsIntent what are my stats for {heroName}
+GetCharacterStatsIntent how am I with {heroName}
+HelpIntent I need help
+HelpIntent where can i get help
+HelpIntent help
+HelpIntent I'm stuck
+HelpIntent call nine one one its an emergency
+QuitIntent goodbye
+QuitIntent stop
+QuitIntent bye
+QuitIntent thank you
+QuitIntent cheerio
+QuitIntent toodaloo
+QuitIntent toodles
+QuitIntent See you later alligater
+QuitIntent see you in a while crocidile

@@ -1,0 +1,28 @@
+{
+    "intents": [
+        {
+            "intent": "GetRankIntent"
+        },
+        {
+            "intent": "GetMainIntent"
+        },
+        {
+            "intent": "GetCharacterStatsIntent",
+            "slots":[
+                {
+                    "name": "heroName",
+                    "type": "HERO"
+                }
+            ]
+        },
+		{
+            "intent": "QuitIntent"
+        },
+		{
+            "intent": "HelpIntent"
+        },
+        {
+            "intent": "AMAZON.HelpIntent"
+        }
+    ]
+}
