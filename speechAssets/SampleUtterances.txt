@@ -1,5 +1,7 @@
 GetRankIntent what is my rank
 GetRankIntent what is my sr
+GetRankIntent what my sr is
+GetRankIntent what my rank is
 GetMainIntent who is my main
 GetMainIntent who do I main
 GetMainIntent who do I play as most
