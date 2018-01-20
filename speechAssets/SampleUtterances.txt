@@ -7,11 +7,19 @@ GetMainIntent who do I main
 GetMainIntent who do I play as most
 GetCharacterStatsIntent what are my stats for {heroName}
 GetCharacterStatsIntent how am I with {heroName}
+GetCharacterStatsIntent what am I like with {heroName}
+GetCharacterStatsIntent how is {heroName}
+GetCharacterStatsIntent whats up with {heroName}
+GetCharacterStatsIntent how bad am I with {heroName}
+GetCharacterStatsIntent how great am I with {heroName}
+GetCharacterStatsIntent how good am I with {heroName}
+GetCharacterStatsIntent how terrible am I with {heroName}
 HelpIntent I need help
 HelpIntent where can i get help
 HelpIntent help
 HelpIntent I'm stuck
 HelpIntent call nine one one its an emergency
+HelpIntent where am I
 QuitIntent goodbye
 QuitIntent stop
 QuitIntent bye
