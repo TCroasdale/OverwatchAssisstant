@@ -32,6 +32,9 @@ exports.handler = function( event, context ){
             getRank(context)
         }
         else if(IntentName == "GetMainIntent"){
+            getMainChar(context)
+        }
+        else if(IntentName == "GetStatsIntent"){
 
         }
         else if(IntentName == "GetCharacterStatsIntent"){
@@ -61,7 +64,7 @@ function getRank(context){
         var prestige = res.response.prestige
         var rank = res.response.ratingName
 
-        var tts = "Your rank is " + rank + " , with " + sr + " sr. you are level " + level + ", prestige " + prestige
+        var tts = "Your rank is " + rank + " , with " + sr + " <say-as interpret-as='spell-out'>sr</say-as>. you are level " + level + ", prestige " + prestige
         if(sr == ""){ //sr="" if there is no rank for this season.
             tts = "You currently have no competitive rank. you are level  " + level + ", prestige " + prestige
         }
@@ -123,6 +126,83 @@ function getCharacterStats(context, hero){
 }
 
 /**
+ * Finds the profiles main character
+ * @param {Alexa Context} context 
+ */
+function getMainChar(context){
+    //complete returns a lot of data, but we need the data for every hero.
+    makeRequestToAPI(new Profile(), "complete", function(res){
+        var tts = ""
+        //Making sure the data fetched was valid.
+        if(!res.nameOK || !res.requestOK || !res.serverOK){
+            tts = "There was a problem fetching that information."
+            if(!res.nameOK){
+                tts += " The name you provded wasn't valid."
+            }
+            if(!res.requestOK){
+                tts += " This was my fault, I made a bad request."
+            }
+            if(!res.serverOK){
+                tts += " there was a problem with the A.P.I servers"
+            }
+        }
+        else{
+            var allHeroStats= {} //Getting data from response.
+            var compGames = res.response.competitiveStats.games.played
+            var quickPGames = res.response.quickPlayStats.games
+            var hasStats = true
+            //Deciding which set of stats to use
+            if(compGames != 0){
+                allHeroStats = res.response.competitiveStats.topHeroes
+            }
+            else if(quickPGames.won != 0){
+                allHeroStats = res.response.quickPlayStats.topHeroes
+            }
+            else{
+                hasStats = false //Someone may have never played the game.
+            }
+
+            //If we have some stats
+            if(hasStats){
+                var bestHero = "ana"
+                var bestTime = 0
+                //Iterate through every hero.
+                for(heroName in allHeroStats){
+                    var hero = allHeroStats[heroName]
+                    if(hero.timePlayed != "--"){
+                        var timeArr = hero.timePlayed.split(" ")
+                        var actTime = 0
+                        //Converting a heros playtime to seconds
+                        if(timeArr[1] == "minutes" || timeArr[1] == "minute"){
+                            actTime = Number(timeArr[0]) * 60
+                        }else if(timeArr[1] == "hours" || timeArr[1] == "hour"){
+                            actTime = Number(timeArr[0]) * 3600
+                        }
+                        //Compare playtimes
+                        if(actTime == bestTime){
+                            //If they have the same playtime, pick the hero with best
+                            //win percentage
+                            if(hero.winPercentage > allHeroStats[bestHero].winPercentage){
+                                bestHero = heroName
+                            }
+                        }else if(actTime > bestTime){
+                            bestHero = heroName
+                            bestTime = actTime
+                        }
+                    }
+                }
+
+                tts = "You currently main: " + bestHero
+            }
+            else{ //no stats
+                tts = "You have no main... I work better if you've actually played the game."
+            }
+        }
+        context.succeed({response: buildSpeechletResponse(tts, false)}) 
+    })
+}
+
+/**
  * Converts JSON hero stats to an english sentence
  * @param {JSON object of hero stats} statsJS 
  */
@@ -130,7 +210,7 @@ function statsToSentence(statsJS){
     var sentence = "You have played for " + statsJS.timePlayed
     sentence += ". won: " + statsJS.gamesWon + " games, thats a " + statsJS.winPercentage
     sentence += " percent win rate."
-    sentence += " you normally get: " + statsJS.eliminationsPerLife + " eliminations per life, your best multikill: is"
+    sentence += " on average, you get: " + statsJS.eliminationsPerLife + " eliminations per life, your best multikill: is"
     sentence += statsJS.multiKillBest + " kills. your accuracy is: " + statsJS.weaponAccuracy + " percent."
     
     return sentence

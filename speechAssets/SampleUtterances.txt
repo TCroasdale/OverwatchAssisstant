@@ -1,7 +1,8 @@
 GetRankIntent what is my rank
-GetRankIntent what is my sr
-GetRankIntent what my sr is
+GetRankIntent what is my s.r.
+GetRankIntent what my s.r. is
 GetRankIntent what my rank is
+GetRankIntent what skill rating am I
 GetMainIntent who is my main
 GetMainIntent who do I main
 GetMainIntent who do I play as most
@@ -14,6 +15,11 @@ GetCharacterStatsIntent how bad am I with {heroName}
 GetCharacterStatsIntent how great am I with {heroName}
 GetCharacterStatsIntent how good am I with {heroName}
 GetCharacterStatsIntent how terrible am I with {heroName}
+GetStatsIntent What are my stats
+GetStatsIntent am I bad at overwatch
+GetStatsIntent What are my overall stats
+GetStatsIntent what my stats are
+GetStatsIntent Tell me my stats
 HelpIntent I need help
 HelpIntent where can i get help
 HelpIntent help

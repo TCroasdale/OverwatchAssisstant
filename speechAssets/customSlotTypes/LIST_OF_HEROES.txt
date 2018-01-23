@@ -3,7 +3,7 @@ genji
 mccree
 pharah
 reaper
-soldier seventy six
+soldier 76
 sombra
 tracer
 bastion
