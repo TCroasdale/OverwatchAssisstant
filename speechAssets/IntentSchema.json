@@ -26,6 +26,87 @@
         },
         {
             "intent": "AMAZON.HelpIntent"
+        },
+        {
+            "intent": "InputRegionIntent",
+            "slots":[{
+                "name": "region",
+                "type": "REGION"
+            }]
+        },
+        {
+            "intent": "InputPlatformIntent",
+            "slots":[{
+                "name": "platform",
+                "type": "PLATFORM"
+            }]
+        },
+        {
+            "intent": "InputNameIntent",
+            "slots":[{
+                "name": "c_one",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_two",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_three",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_four",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_five",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_six",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_seven",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_eight",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_nine",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_ten",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_eleven",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_twelve",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_thirteen",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_fourteen",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_fifteen",
+                "type": "CHARACTERS"
+            },
+            {
+                "name": "c_sixteen",
+                "type": "CHARACTERS"
+            }]
         }
     ]
 }

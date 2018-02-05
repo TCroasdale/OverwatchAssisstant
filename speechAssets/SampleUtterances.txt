@@ -35,3 +35,47 @@ QuitIntent toodaloo
 QuitIntent toodles
 QuitIntent See you later alligater
 QuitIntent see you in a while crocidile
+
+InputRegionIntent my region is {region}
+InputRegionIntent i live in {region}
+InputRegionIntent i play in {region}
+InputRegionIntent i am in region {region}
+InputRegionIntent set my region to {region}
+
+InputPlatformIntent I play on {platform}
+InputPlatformIntent {platform} is the master race
+InputPlatformIntent my platform is {platform}
+InputPlatformIntent set my paltform to {platform}
+
+InputNameIntent my name is {c_one}
+InputNameIntent my name is {c_one} {c_two}
+InputNameIntent my name is {c_one} {c_two} {c_three}
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four}
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four} {c_five}
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four} {c_five} {c_six}
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} 
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight}
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine}
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten}
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten} {c_eleven} 
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten} {c_eleven} {c_twelve}
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten} {c_eleven} {c_twelve} {c_thirteen}
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten} {c_eleven} {c_twelve} {c_thirteen} {c_fourteen}
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten} {c_eleven} {c_twelve} {c_thirteen} {c_fourteen} {c_fifteen}
+InputNameIntent my name is {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten} {c_eleven} {c_twelve} {c_thirteen} {c_fourteen} {c_fifteen} {c_sixteen}
+InputNameIntent set my name to {c_one}
+InputNameIntent set my name to {c_one} {c_two}
+InputNameIntent set my name to {c_one} {c_two} {c_three}
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four}
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four} {c_five}
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four} {c_five} {c_six}
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} 
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight}
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine}
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten}
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten} {c_eleven} 
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten} {c_eleven} {c_twelve}
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten} {c_eleven} {c_twelve} {c_thirteen}
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten} {c_eleven} {c_twelve} {c_thirteen} {c_fourteen}
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten} {c_eleven} {c_twelve} {c_thirteen} {c_fourteen} {c_fifteen}
+InputNameIntent set my name to {c_one} {c_two} {c_three} {c_four} {c_five} {c_six} {c_seven} {c_eight} {c_nine} {c_ten} {c_eleven} {c_twelve} {c_thirteen} {c_fourteen} {c_fifteen} {c_sixteen}

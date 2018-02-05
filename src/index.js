@@ -14,32 +14,59 @@ function Profile(){
 
 exports.handler = function( event, context ){	
 
-	var sessionAttributes = {} //variables stored from the last command.
+	var sessionAttributes = {"platform": "--", "region": "--", "player": "--"} //variables stored from the last command.
 	if(event.session.attributes)
-		sessionAttributes = event.session.attributes
+        sessionAttributes = event.session.attributes
+    
 	
 	
     if (event.request.type === "LaunchRequest") { //If OWA is launcher without intent.
         var out = "Hello, I am overwatch assistant. how may I help?"
-        context.succeed({response: buildSpeechletResponse(out, false)})
+        context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse(out, false)})
     }else if(event.request.type === "SessionEndedRequest"){ //If OWA is exited by saying "quit"
 		var out = "Heroes never die"
 		context.succeed({response: buildSpeechletResponse(out, true)})
 	}else{ //If a command is given
 		var IntentName = event.request.intent.name
-        
+        if(IntentName == "InputRegionIntent"){
+            var reg = event.request.intent.slots.region.value
+            var out = "Setting your region to " + reg
+            sessionAttributes.region = getRegionCode(reg)
+            context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse(out, false)})
+        }
+        else if(IntentName == "InputPlatformIntent"){
+            var plat = event.request.intent.slots.platform.value
+            var out = "Setting your platform to " + plat
+            sessionAttributes.platform = getPlatform(plat)
+            context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse(out, false)})
+        }
+
+
         if(IntentName == "GetRankIntent"){
-            getRank(context)
+            if(checkSeshAttributes(sessionAttributes)){
+                getRank(context, getAttrProfile(sessionAttributes))
+            }else{
+                context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse("no profile", false)})
+            }
         }
         else if(IntentName == "GetMainIntent"){
-            getMainChar(context)
+            if(checkSeshAttributes(sessionAttributes)){
+                getMainChar(context, getAttrProfile(sessionAttributes))
+            }else{
+                context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse("no profile", false)})
+            }
         }
         else if(IntentName == "GetStatsIntent"){
-
+            var out = "Not Yet implemented"
+		    context.succeed({response: buildSpeechletResponse(out, true)})
         }
         else if(IntentName == "GetCharacterStatsIntent"){
             var hero = parseHeroSlot(event.request.intent.slots.heroName.value)
-            getCharacterStats(context, hero);
+            if(checkSeshAttributes(sessionAttributes)){
+                getCharacterStats(context, getAttrProfile(sessionAttributes))
+            }else{
+                context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse("no profile", false)})
+            }
         }
         else if(IntentName === "HelpIntent"){ //If help is asked for
 			var out = "try asking about your favourite character."
@@ -56,8 +83,8 @@ exports.handler = function( event, context ){
  * Processes a getRankIntent request
  * @param {*} context The amazon alexa context.
  */
-function getRank(context){
-    makeRequestToAPI(new Profile(), 'profile', function(res){
+function getRank(context, prof){
+    makeRequestToAPI(prof, 'profile', function(res){
         
         var sr = res.response.rating
         var level = res.response.level
@@ -92,8 +119,8 @@ function getRank(context){
  * @param {Alexa Context} context The alexa context provided 
  * @param {string} hero The Hero name (must be the API version) 
  */
-function getCharacterStats(context, hero){
-    makeRequestToAPI(new Profile(), 'heroes/'+hero, function(res){
+function getCharacterStats(context, prof, hero){
+    makeRequestToAPI(prof, 'heroes/'+hero, function(res){
         var tts = ""
         //Making sure the data fetched was valid.
         if(!res.nameOK || !res.requestOK || !res.serverOK){
@@ -129,9 +156,9 @@ function getCharacterStats(context, hero){
  * Finds the profiles main character
  * @param {Alexa Context} context 
  */
-function getMainChar(context){
+function getMainChar(context, prof){
     //complete returns a lot of data, but we need the data for every hero.
-    makeRequestToAPI(new Profile(), "complete", function(res){
+    makeRequestToAPI(prof, "complete", function(res){
         var tts = ""
         //Making sure the data fetched was valid.
         if(!res.nameOK || !res.requestOK || !res.serverOK){
@@ -217,6 +244,58 @@ function statsToSentence(statsJS){
 }
 
 /**
+ * gets the region code from a string.
+ * @param {string} regName The alexa identified region
+ */
+function getRegionCode(regName){
+    regName = regName.toLowerCase()
+    if(regName == "europe"){
+        return "eu"
+    }
+    else if(regName == "north america"){
+        return "us"
+    }
+    return ""
+}
+
+/**
+ * returns whether the suers profile has been set.
+ * @param {sessionAttributes} attr 
+ */
+function checkSeshAttributes(attr){
+    if(attr.region == "--"){
+        return false
+    }else if(attr.platform == "--"){
+        return false
+    }else if(attr.player == "--"){
+        return false
+    }
+    return true
+}
+
+function getAttrProfile(attr){
+    var p = new Profile()
+    p.platform = attr.platform
+    p.region = attr.region
+    p.player = attr.player
+    return p
+}
+
+/**
+ * @param {string} platName The alexa identified platform
+ */
+function getPlatform(platName){
+    platName = platName.toLowerCase()
+    if(platName == "playstation"){
+        return "psn"
+    }
+    else if(platName == "xbox"){
+        return "xbl"
+    }
+    return "pc"
+}
+
+/**
  * Makes a request to the API.
  * @param {Profile} profile The profile of the user 
  * @param {string} apiReq The request to make
@@ -288,7 +367,7 @@ function parseHeroSlot(hero){
  * @param {string} say What alexa should say
  * @param {bool} shouldEndSession whether or not alexa should close OWA
  */
-function buildSpeechletResponse(say, shouldEndSession) {
+function buildSpeechletResponse(say, shouldEndSession, attr) {
     return {
         outputSpeech: {
             type: "SSML",
@@ -300,7 +379,7 @@ function buildSpeechletResponse(say, shouldEndSession) {
                 ssml: "<speak>Please try again.</speak>"
             }
         },
-        shouldEndSession: shouldEndSession
+        shouldEndSession: shouldEndSession,
     }
 }
 
